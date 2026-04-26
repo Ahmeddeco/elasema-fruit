@@ -1,0 +1,79 @@
+import { ProductCartType } from "@/types/product.type"
+import { toast } from "sonner"
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
+
+export type CartItem = {
+  id: string
+  quantity: number
+  title: string
+  price: number
+  image: string
+}
+
+type CartState = {
+  items: CartItem[]
+  addToCart: (product: ProductCartType) => void
+  removeFromCart: (id: string) => void
+  updateQuantity: (type: 'increment' | 'decrement', id: string) => void
+}
+
+
+export const useCartStore = create<CartState>()(
+  persist(
+    (set, get) => ({
+      items: [],
+
+      /* -------------------------------- addToCart ------------------------------- */
+      addToCart: (product) => {
+        const existingProduct = get().items.find((item) => item.id === product.id)
+        set({
+          items: existingProduct
+            ? get().items
+            : [
+              ...get().items,
+              {
+                quantity: 1,
+                id: product.id!,
+                title: product.title,
+                price: product.price,
+                image: product.mainImage,
+              },
+            ],
+        })
+        if (existingProduct) {
+          toast.error("Product Already exists")
+        } else {
+          toast.success('تم إضافة المنتج الى السلة بنجاح.')
+        }
+      },
+
+      /* ----------------------------- removeFromCart ----------------------------- */
+      removeFromCart: (id) => {
+        set({
+          items: get().items.filter((item) => item.id !== id),
+        })
+        toast.error('تم إزالة المنتج من السلة.')
+
+      },
+
+      /* --------------------------- updateQuantity --------------------------- */
+      updateQuantity: (type, id) => {
+        set({
+          items: get().items.map((item) =>
+            item.id === id
+              ? {
+                ...item,
+                quantity:
+                  type === "increment"
+                    ? item.quantity + 1
+
+                    : Math.max(1, item.quantity - 1), // preventing the quantity from going below 1 when decrementing.
+              }
+              : item
+          ),
+        })
+      }
+    }), { name: 'alasema-fruits' }
+  )
+)
