@@ -123,7 +123,7 @@ export function UploadOneImagesDropZone({ dbImage, label = "image", imageName = 
 					) : (
 						<UploadDropzone
 							config={{ cn: twMerge }}
-							className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:cursor-pointer ut-button:px-8 ut-button:py-4 ut-ready:p-12 ut-readying:p-12 ut-uploading:p-12 ut-label:text-foreground ut-upload-icon:size-12 ut-upload-icon:text-foreground "
+							className="ut-button:bg-primary ut-button:ut-readying:bg-primary/50 ut-button:text-primary-foreground ut-button:cursor-pointer ut-button:px-8 ut-button:py-4 ut-ready:p-12 ut-readying:p-12 ut-uploading:p-12 ut-label:text-foreground ut-upload-icon:size-12 ut-upload-icon:text-foreground "
 							endpoint={"oneImageUploader"}
 							onClientUploadComplete={(res: any) => {
 								setImage(res[0].ufsUrl)

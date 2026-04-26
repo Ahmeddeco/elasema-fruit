@@ -1,6 +1,10 @@
 export const frontNav = [
   {
-    title: "التسوق",
+    title: "الرئيسية",
+    href: "/"
+  },
+  {
+    title: "المتجر",
     href: "/shop"
   },
   {
@@ -12,7 +16,7 @@ export const frontNav = [
     href: "/information"
   },
   {
-    title: "server",
-    href: "/server"
+    title: "admin",
+    href: "/admin"
   },
 ]

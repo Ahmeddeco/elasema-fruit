@@ -1,12 +1,11 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme/theme-provider"
-import NavBar from "@/components/layout/NavBar"
-import Footer from "@/components/layout/Footer"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { CircleAlert, CircleCheckBig, CircleX } from "lucide-react"
-import { Toaster } from "@/components/ui/sonner"
 import localFont from "next/font/local"
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
+import { extractRouterConfig } from "uploadthing/server"
+import { ourFileRouter } from "@/app/api/uploadthing/core"
 
 const rubik = localFont({
 	src: "../../public/Rubik.ttf",
@@ -24,25 +23,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ar" dir="rtl" suppressHydrationWarning className={` h-full antialiased`}>
-			<body className={`${rubik.className} min-h-full flex flex-col`}>
+			<body className={`${rubik.className} min-h-dvh `}>
+				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-					<NavBar />
-					<TooltipProvider>
-						<main className="min-h-svh">
-							{children}
-							<Toaster
-								theme="system"
-								richColors
-								duration={5000}
-								icons={{
-									success: <CircleCheckBig />,
-									warning: <CircleAlert />,
-									error: <CircleX />,
-								}}
-							/>
-						</main>
-					</TooltipProvider>
-					<Footer />
+					<TooltipProvider>{children}</TooltipProvider>
 				</ThemeProvider>
 			</body>
 		</html>

@@ -359,16 +359,6 @@ export type SessionUncheckedUpdateManyInput = {
   impersonatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type SessionListRelationFilter = {
-  every?: Prisma.SessionWhereInput
-  some?: Prisma.SessionWhereInput
-  none?: Prisma.SessionWhereInput
-}
-
-export type SessionOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type SessionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
@@ -403,6 +393,28 @@ export type SessionMinOrderByAggregateInput = {
   userAgent?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   impersonatedBy?: Prisma.SortOrder
+}
+
+export type SessionListRelationFilter = {
+  every?: Prisma.SessionWhereInput
+  some?: Prisma.SessionWhereInput
+  none?: Prisma.SessionWhereInput
+}
+
+export type SessionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type SessionCreateNestedManyWithoutUserInput = {

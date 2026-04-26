@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-
+@source "../../node_modules/@uploadthing/react/dist";
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -224,5 +224,17 @@
 	}
 	.stdropdown-menu {
 		@apply bg-input! text-foreground!;
+	}
+	[data-sonner-toaster] {
+		/* لضمان عدم تأثيره كـ Flex Item */
+		position: fixed !important;
+		/* تصفير أي مسافات قد يضيفها Tailwind 4 بشكل تلقائي للعناصر */
+		margin: 0 !important;
+		padding: 0 !important;
+		pointer-events: none;
+	}
+
+	[data-sonner-toaster] * {
+		pointer-events: auto;
 	}
 }
